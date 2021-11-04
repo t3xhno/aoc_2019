@@ -47,11 +47,11 @@ fn run(arg: &str, input: &str) -> Result<(), &'static str> {
 }
 
 fn solve1(input: &str) {
-    let mut sum = 0;
-    input.lines().for_each(|line| {
-        sum += (line.parse::<i32>().unwrap() / 3) - 2;
-    });
-    println!("{}", sum);
+    println!(
+        "{}",
+        input.lines()
+            .fold(0, |acc, line| acc + line.parse::<i32>().unwrap() / 3 - 2)
+    );
 }
 
 fn solve2(input: &str) {
