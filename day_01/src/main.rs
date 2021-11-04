@@ -1,28 +1,13 @@
-use std::{env, fs, error};
+mod arguments;
+
+use std::{fs, error};
+use arguments::Arguments;
 
 fn main() -> Result<(), Box<dyn error::Error>> {
-    let config = Config::new()?;
-    let input = fs::read_to_string(&config.file)?;
-    solve(&config.solution, &input);
+    let arguments = Arguments::new()?;
+    let input = fs::read_to_string(&arguments.file)?;
+    solve(&arguments.solution, &input);
     Ok(())
-}
-
-struct Config {
-    file: String,
-    solution: String,
-}
-
-impl Config {
-    fn new() -> Result<Config, &'static str> {
-        let args = env::args().collect::<Vec<String>>();
-        match args.len() < 3 {
-            true => Err("Needs 2 arguments [Filename + solution number]"),
-            _ => Ok(Config {
-                file: args[1].clone(),
-                solution: args[2].clone(),
-            })
-        }
-    }
 }
 
 fn calculate_fuel(current: i32) -> i32 {
