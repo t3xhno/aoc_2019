@@ -4,6 +4,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let config = Config::new()?;
     let input = fs::read_to_string(&config.file)?;
     run(&config.solution, &input)?;
+    // println!("{}", calculate_fuel(100756));
     Ok(())
 }
 
@@ -34,6 +35,14 @@ fn run(arg: &str, input: &str) -> Result<(), &'static str> {
     Ok(())
 }
 
+fn calculate_fuel(current: i32) -> i32 {
+    let current = current / 3 - 2;
+    match current <= 0 {
+        true => 0,
+        _ => current + calculate_fuel(current)
+    }
+}
+
 fn solve1(input: &str) {
     println!(
         "{}",
@@ -42,6 +51,10 @@ fn solve1(input: &str) {
     );
 }
 
-fn solve2(_input: &str) {
-    unimplemented!()
+fn solve2(input: &str) {
+    println!(
+        "{}",
+        input.lines()
+            .fold(0, |acc, curr| acc + calculate_fuel(curr.parse::<i32>().unwrap()))
+    )
 }
