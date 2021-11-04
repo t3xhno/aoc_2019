@@ -13,8 +13,7 @@ fn solve(input: &str) -> i32 {
     while codes.opcode != 99 {
         match codes.opcode {
             1 => codes.list[codes.dest] = codes.first + codes.second,
-            2 => codes.list[codes.dest] = codes.first * codes.second,
-            _ => unreachable!(),
+            _ => codes.list[codes.dest] = codes.first * codes.second,
         };
         codes.next();
     };
