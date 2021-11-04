@@ -24,7 +24,7 @@ impl Config {
     fn parse_args() -> Result<Config, &'static str> {
         let args = env::args().collect::<Vec<String>>();
         match args.len() < 3 {
-            true => Err("Needs 2 arguments."),
+            true => Err("Needs 2 arguments [Filename + solution number]"),
             _ => Ok(Config {
                 file: args[1].clone(),
                 solution: args[2].clone(),
@@ -41,7 +41,7 @@ fn run(arg: &str, input: &str) -> Result<(), &'static str> {
     match arg {
         "1" => solve1(input),
         "2" => solve2(input),
-        _ => return Err("Argument is 1 or 2.")
+        _ => return Err("Solution is 1 or 2.")
     };
     Ok(())
 }
