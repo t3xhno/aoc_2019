@@ -17,9 +17,13 @@ fn calculate_fuel(current: i32) -> i32 {
     }
 }
 
+fn t_line(line: &str) -> i32 {
+    line.parse::<i32>().unwrap() / 3 - 2
+}
+
 fn solve(flag: &str, input: &str) -> i32 {
     input.lines().fold(0, |acc, line| acc + match flag {
-        "1" => line.parse::<i32>().unwrap() / 3 - 2,
-        _ => calculate_fuel(line.parse::<i32>().unwrap() / 3 - 2)
+        "1" => t_line(line),
+        _ => calculate_fuel(t_line(line))
     })
 }
