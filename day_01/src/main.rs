@@ -1,7 +1,7 @@
 use std::{env, fs, error};
 
 fn main() -> Result<(), Box<dyn error::Error>> {
-    let config = Config::parse_args()?;
+    let config = Config::new()?;
     let input = fs::read_to_string(&config.file)?;
     run(&config.solution, &input)?;
     Ok(())
@@ -13,7 +13,7 @@ struct Config {
 }
 
 impl Config {
-    fn parse_args() -> Result<Config, &'static str> {
+    fn new() -> Result<Config, &'static str> {
         let args = env::args().collect::<Vec<String>>();
         match args.len() < 3 {
             true => Err("Needs 2 arguments [Filename + solution number]"),
