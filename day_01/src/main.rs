@@ -6,7 +6,7 @@ use arguments::Arguments;
 fn main() -> Result<(), Box<dyn error::Error>> {
     let arguments = Arguments::new()?;
     let input = fs::read_to_string(&arguments.file)?;
-    solve(&arguments.solution, &input);
+    println!("{}", solve(&arguments.solution, &input));
     Ok(())
 }
 
@@ -17,10 +17,9 @@ fn calculate_fuel(current: i32) -> i32 {
     }
 }
 
-fn solve(flag: &str, input: &str) {
-    let total_fuel = input.lines().fold(0, |acc, line| acc + match flag {
+fn solve(flag: &str, input: &str) -> i32 {
+    input.lines().fold(0, |acc, line| acc + match flag {
         "1" => line.parse::<i32>().unwrap() / 3 - 2,
         _ => calculate_fuel(line.parse::<i32>().unwrap() / 3 - 2)
-    });
-    println!("{}", total_fuel);
+    })
 }
