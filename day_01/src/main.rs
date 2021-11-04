@@ -42,6 +42,6 @@ fn solve1(input: &str) {
     );
 }
 
-fn solve2(input: &str) {
-    println!("{}", input);
+fn solve2(_input: &str) {
+    unimplemented!()
 }
