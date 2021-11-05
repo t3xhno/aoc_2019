@@ -31,7 +31,6 @@ pub struct Codes {
 impl Codes {
     pub fn new(input: &str) -> Codes {
         let mut list = input.split(",").map(|e| e.parse::<i32>().unwrap()).collect::<Vec<i32>>();
-        println!("{}", list[0]);
         list[1] = 12; list[2] = 2;
         Codes {
             list,
@@ -41,6 +40,17 @@ impl Codes {
             opcode: input.split(",").map(|e| e.parse::<i32>().unwrap()).collect::<Vec<i32>>()[0],
             dest: input.split(",").map(|e| e.parse::<i32>().unwrap()).collect::<Vec<i32>>()[3] as usize,
         }
+    }
+
+    pub fn calculate(&mut self) -> i32 {
+        while self.opcode != 99 {
+            match self.opcode {
+                1 => self.list[self.dest] = self.first + self.second,
+                _ => self.list[self.dest] = self.first * self.second,
+            };
+            self.next();
+        };
+        self.list[0]
     }
 
     pub fn next(&mut self) {
